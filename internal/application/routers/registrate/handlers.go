@@ -19,8 +19,8 @@ func start(context *telegram.ContextMessage) {
 func getFirstName(context *telegram.ContextMessage) {
 	defer context.Bot.FSM().Set(context.UserID(), lastNameState)
 
-	storage := fsm.GetFSM[UserData](context.Bot.FSM(), context.UserID())
-	storage.SetData(context.UserID(), UserData{FirstName: context.Update.Message.Text})
+	storage := fsm.GetFSM[UserData](context)
+	storage.Set(UserData{FirstName: context.Update.Message.Text})
 	context.Answer("Теперь фамилию")
 
 }
@@ -28,8 +28,8 @@ func getFirstName(context *telegram.ContextMessage) {
 func getLastName(context *telegram.ContextMessage) {
 	defer context.Bot.FSM().Finish(context.UserID())
 
-	storage := fsm.GetFSM[UserData](context.Bot.FSM(), context.UserID())
-	data, _ := storage.GetData(context.UserID())
+	storage := fsm.GetFSM[UserData](context)
+	data := storage.Get()
 	data.LastName = context.Update.Message.Text
 
 	context.Answer(fmt.Sprintf("Все я тебя записал %s %s", data.FirstName, data.LastName))

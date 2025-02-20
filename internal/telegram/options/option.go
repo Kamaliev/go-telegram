@@ -1,10 +1,12 @@
 package options
 
-import "TelegramBot/internal/telegram/fsm"
+import (
+	"TelegramBot/internal/telegram/domain"
+)
 
 type Options struct {
 	matchString string
-	state       fsm.State
+	state       domain.State
 }
 
 func (ho Options) MatchString() *string {
@@ -14,7 +16,7 @@ func (ho Options) MatchString() *string {
 	return &ho.matchString
 }
 
-func (ho Options) State() *fsm.State {
+func (ho Options) State() *domain.State {
 	return &ho.state
 }
 
@@ -25,7 +27,7 @@ func WithMatchString(matchString string) Option {
 		o.matchString = matchString
 	}
 }
-func WithState(state fsm.State) Option {
+func WithState(state domain.State) Option {
 	return func(o *Options) {
 		o.state = state
 	}

@@ -1,8 +1,8 @@
 package registrate
 
-import "TelegramBot/internal/telegram/fsm"
+import "TelegramBot/internal/telegram/domain"
 
 const (
-	firstNameState fsm.State = "FirstNameState"
-	lastNameState  fsm.State = "LastNameState"
+	firstNameState domain.State = "FirstNameState"
+	lastNameState  domain.State = "LastNameState"
 )

@@ -1,7 +1,7 @@
 package telegram
 
 import (
-	"TelegramBot/internal/telegram/fsm"
+	"TelegramBot/internal/telegram/domain"
 )
 
 type Handler interface {
@@ -18,7 +18,7 @@ func (handler defaultHandler) HandleCallbackQuery(context *ContextCallbackQuery)
 type MessageHandler struct {
 	handle     func(context *ContextMessage)
 	matchSting *string
-	state      *fsm.State
+	state      *domain.State
 	defaultHandler
 }
 
@@ -43,7 +43,7 @@ func (m MessageHandler) HandleMessage(context *ContextMessage) {
 type CallbackQueryHandler struct {
 	handle     func(context *ContextCallbackQuery)
 	matchSting *string
-	state      *fsm.State
+	state      *domain.State
 	defaultHandler
 }
 

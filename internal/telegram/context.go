@@ -1,6 +1,7 @@
 package telegram
 
 import (
+	"TelegramBot/internal/telegram/domain"
 	"TelegramBot/internal/telegram/models/request"
 	"TelegramBot/internal/telegram/models/response"
 )
@@ -8,6 +9,10 @@ import (
 type Context struct {
 	Bot    *Bot
 	Update *response.Update
+}
+
+func (ctx *Context) FSM() domain.AbstractFsm {
+	return ctx.Bot.fsm
 }
 
 func NewContext(bot *Bot, update *response.Update) *Context {

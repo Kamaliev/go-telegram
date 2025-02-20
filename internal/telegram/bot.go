@@ -1,6 +1,7 @@
 package telegram
 
 import (
+	"TelegramBot/internal/telegram/domain"
 	"TelegramBot/internal/telegram/fsm"
 	"TelegramBot/internal/telegram/models/request"
 	"TelegramBot/internal/telegram/models/response"
@@ -24,7 +25,7 @@ type Bot struct {
 	httpClient  *http.Client
 	updates     chan response.Update
 	workers     int
-	fsm         *fsm.MultiTypeMemoryFSM
+	fsm         domain.AbstractFsm
 }
 
 func NewBot(token string, router *Router) *Bot {
@@ -93,6 +94,6 @@ func (b *Bot) processUpdate(wg *sync.WaitGroup) {
 	}
 }
 
-func (b *Bot) FSM() *fsm.MultiTypeMemoryFSM {
+func (b *Bot) FSM() domain.AbstractFsm {
 	return b.fsm
 }

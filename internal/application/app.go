@@ -15,7 +15,7 @@ func NewRouter() *telegram.Router {
 }
 
 func (app App) Run() {
-	token := os.Getenv("BOT_TOKEN")
+	token := os.Getenv("TELEGRAM_TOKEN")
 	bot := telegram.NewBot(token, NewRouter())
 	bot.Start()
 }
